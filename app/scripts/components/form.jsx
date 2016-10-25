@@ -19,23 +19,25 @@ var ImageForm = React.createClass({
       <form>
         <div class="form-group row">
           <div class="col-xs-8">
-            <input class="form-control" type="url" id="example-url-input" placeholder="Image URL"/>
+            <label htmlFor="imageURL">Image URL</label>
+            <input class="form-control" type="url" id="imageURL" placeholder="Image URL"/>
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-xs-8">
-            <input class="form-control" type="text" id="example-text-input" placeholder="Image Caption"/>
+            <label htmlFor="caption">Caption</label>
+            <input class="form-control" type="text" id="caption" placeholder="Image Caption"/>
           </div>
         </div>
-        <button type="button" name="button">Cancel</button>
-        <button type="submit" class="btn btn-primary">Add Image</button>
+        <button className="btn btn-warning">Cancel</button>
+        <button className="btn btn-success">Add Image</button>
       </form>
       );
     }
     return (
     <div className= "well">
-      <button className="btn btn-success" onClick={this.handleClick}>Show Instructions</button>
+      <button className="added-form" onClick={this.handleClick}>+</button>
       {display}
     </div>
     );
