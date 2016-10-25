@@ -1,49 +1,45 @@
-var _ = require('underscore');
 var React = require('react');
-var Backbone = require('backbone');
 
-var ImageForm = React.createClass({
-  componentWillMount: function(){
-    this.showForm = false;
+var FormComponent = React.createClass({
+  getInitialState: function(){
+    return{
+      url: this.props.model.get('url');
+      caption: this.props.model.get('caption')
+    };
   },
-  handleClick: function(e){
-  e.preventDefault();
+  handleUrlChange: function(e){
+    var urlInputValue = e.target.value;
+    this.setState({url: urlInputValue});
+  },
+  handleCaptionChange: function(e){
+    var captionValue = e.target.value;
+    this.setState({caption: captionValue})
+  },
+  handleSubmit: function(e){
+    e.preventDefault();
+    var newImage = {url: this.state.url, caption: this.state.caption};
 
-  this.showForm = !this.showForm;
-  this.forceUpdate();
+    this.props.addImage(newImage);
+
+    this.setState({url: '', caption: ''});
   },
   render: function(){
-    var display:
-    if(this.showForm){
-      display = (
-      <form>
-        <div class="form-group row">
-          <div class="col-xs-8">
-            <label htmlFor="imageURL">Image URL</label>
-            <input class="form-control" type="url" id="imageURL" placeholder="Image URL"/>
-          </div>
+    return (
+      <form onSubmit={this.handleSubmit} className="well" action="index.html" method="post">
+        <div className="form-group">
+          <label htmlFor="url">Image URL</label>
+          <input onChange={this.handleUrlChange} className="form-control" type="text" id="url" value={this.state.url} placeholder="Image URL"/>
         </div>
-
-        <div class="form-group row">
-          <div class="col-xs-8">
-            <label htmlFor="caption">Caption</label>
-            <input class="form-control" type="text" id="caption" placeholder="Image Caption"/>
-          </div>
+        <div className="form-group">
+          <label htmlFor="caption">Image Caption</label>
+          <textarea onChange={this.handleUrlChange} className="form-control" type="text" id="caption" value={this.state.caption} placeholder="Image Caption" row="3"/>
         </div>
-        <button className="btn btn-warning">Cancel</button>
-        <button className="btn btn-success">Add Image</button>
+        <button type="submit" className="btn btn-success">Add Image</button>
       </form>
       );
     }
-    return (
-    <div className= "well">
-      <button className="added-form" onClick={this.handleClick}>+</button>
-      {display}
-    </div>
-    );
-  }
 });
 
 module.exports = {
-  ImageForm: ImageForm
+  FormComponent: FormComponent
 }

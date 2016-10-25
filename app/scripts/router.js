@@ -4,8 +4,8 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var models = require('./models/image');
-var form = require('./components/form.jsx').ImageForm;
-var listing = require('./components/listing.jsx').BlogListing;
+var form = require('./form.jsx').ImageForm;
+var listing = require('./listing.jsx').BlogListing;
 
 var AppRouter = Backbone.Router.extend({
   routes: {
